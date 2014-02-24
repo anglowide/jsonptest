@@ -30,4 +30,20 @@ object Application extends Controller {
     }
   }  
 
+ def getNoCallbackTest(someNumber:Int) = Action.async{
+    Future {
+      val json = JsObject(Seq(
+        "users" -> JsArray(Seq(
+          JsObject(Seq(
+            "name" -> JsString("Bob"),
+            "age" -> JsNumber(31),
+            "email" -> JsString("bob@gmail.com"),
+            "someNumber" -> JsNumber(someNumber)
+          ))
+        ))
+      ))
+      Ok ( Json.toJson(json))
+    }
+  }  
+
 }
